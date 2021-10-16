@@ -1,7 +1,7 @@
 CREATE TABLE healthDeclaration(
     date DATE,
     temp NUMERIC(3, 1) NOT NULL,
-    fever BOOLEAN NOT NULL,
+    fever BOOLEAN NOT NULL DEFAULT FALSE,
     eid INTEGER,
     FOREIGN KEY (eid) REFERENCES Employees(eid),
     PRIMARY KEY (eid, date),
