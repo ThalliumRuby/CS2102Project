@@ -1,4 +1,4 @@
-CREATE TABLE Department(
+CREATE TABLE Departments(
     did INTEGER,
     dname VARCHAR(50) NOT NULL,
     PRIMARY KEY (did)
