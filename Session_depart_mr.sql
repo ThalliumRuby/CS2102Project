@@ -15,6 +15,8 @@ CREATE TABLE MeetingRooms(
 
 CREATE TABLE Sessions(
     session_date DATE,
-    session_time TIME,
-    PRIMARY KEY (session_date,session_time),
+    start_hour TIME,
+    end_hour TIME,
+    PRIMARY KEY (session_date,start_hour,end_hour),
+    CONSTRAINT valid_sessiontime CHECK(start_hour <= end_hour)
 );
