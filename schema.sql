@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS healthDeclaration, Employees, Departments, MeetingRooms, Sessions, Updates;
+
 CREATE TABLE healthDeclaration(
     date DATE,
     temp NUMERIC(3, 1) NOT NULL,
