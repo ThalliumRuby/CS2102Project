@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS healthDeclaration, Employees, Departments, MeetingRooms, Sessions, Updates;
 
 CREATE TABLE healthDeclaration(
-    date DATE,
+    declareDate DATE,
     temp NUMERIC(3, 1) NOT NULL,
     fever BOOLEAN NOT NULL DEFAULT FALSE,
     eid INTEGER,
