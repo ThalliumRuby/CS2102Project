@@ -1,5 +1,5 @@
 CREATE TABLE healthDeclaration(
-    date DATE,
+    declearDate DATE,
     temp NUMERIC(3, 1) NOT NULL,
     fever BOOLEAN NOT NULL DEFAULT FALSE,
     eid INTEGER,
