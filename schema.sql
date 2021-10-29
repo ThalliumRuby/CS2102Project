@@ -15,7 +15,7 @@ CREATE TABLE Employees(
     ename VARCHAR(50) NOT NULL,
     email VARCHAR(50),
     contact VARCHAR(50) NOT NULL,
-    resignedDate DATE DEFAULT FALSE,
+    resignedDate DATE DEFAULT NULL,
     ekind VARCHAR(10),
     PRIMARY KEY (eid),
     FOREIGN KEY (did) REFERENCES Departments(did)
