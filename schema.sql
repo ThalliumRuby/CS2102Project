@@ -15,7 +15,7 @@ CREATE TABLE Employees(
     ename VARCHAR(50) NOT NULL,
     email VARCHAR(50),
     contact VARCHAR(50) NOT NULL,
-    resignedDate DATE,
+    resignedDate DATE DEFAULT FALSE,
     ekind VARCHAR(10),
     PRIMARY KEY (eid),
     FOREIGN KEY (did) REFERENCES Departments(did)
@@ -40,7 +40,10 @@ CREATE TABLE MeetingRooms(
 CREATE TABLE Sessions(
     session_date DATE,
     session_time TIME,
-    PRIMARY KEY (session_date,session_time)
+    session_floor INTEGER,
+    session_room INTEGER,
+    PRIMARY KEY (session_date,session_time, session_floor, session_room)
+    FOREIGN KEY(session_floor, session_room) REFERENCES MeetingRooms(floors, room)
 );
 
 CREATE TABLE Updates(
