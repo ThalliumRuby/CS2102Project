@@ -16,7 +16,7 @@ CREATE TABLE Employees(
     email VARCHAR(50),
     contact VARCHAR(50) NOT NULL,
     resignedDate DATE,
-    type VARCHAR(10),
+    ekind VARCHAR(10),
     PRIMARY KEY (eid),
     FOREIGN KEY (did) REFERENCES Departments(did)
     CHECK (type IN {'Junior', 'Senior', 'Manager'})
@@ -29,12 +29,12 @@ CREATE TABLE Departments(
 );
 
 CREATE TABLE MeetingRooms(
-    floor INTEGER,
+    floors INTEGER,
     room INTEGER,
     rname VARCHAR(50) NOT NULL,
     capacity INTEGER,
     update_date DATE,
-    PRIMARY KEY (floor, room)
+    PRIMARY KEY (floors, room)
 );
 
 CREATE TABLE Sessions(
@@ -46,8 +46,8 @@ CREATE TABLE Sessions(
 CREATE TABLE Updates(
     date DATE,
     new_cap INTEGER ,
-    floor INTEGER ,
+    floors INTEGER ,
     room INTEGER ,
     PRIMARY KEY (date),
-    FOREIGN KEY (floor, room) REFERENCES MeetingRooms(floor, room)
+    FOREIGN KEY (floors, room) REFERENCES MeetingRooms(floors, room)
 );
