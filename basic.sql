@@ -66,3 +66,17 @@ AS $$
     WHERE eid = employee_id;
 
 $$ LANGUAGE sql;
+
+CREATE TRIGGER check_room_capacity
+    AFTER INSERT OR UPDATE ON Updates
+    FOR EACH ROW EXECUTE FUNCTION update_cap();
+
+CREATE OR REPLACE FUNCTION update_cap()
+RETURN TRIGGER AS $$
+BEGIN
+IF (NEW.change_date = CURRENT_DATE ) THEN
+    UPDATE MeetingRooms SET capacity = NEW.new_capacity WHERE floors = NEW.floor_no AND room = NEW.room_no;
+    UPDATE MeetingRooms SET update_date = NEW.change_date WHERE floors = NEW.floor_no AND room = NEW.room_no;
+END IF;
+END;
+$$ LANGUAGE sql;
