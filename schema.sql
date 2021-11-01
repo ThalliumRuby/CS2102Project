@@ -15,13 +15,13 @@ CREATE TABLE Employees(
     eid INTEGER,
     did INTEGER,
     ename VARCHAR(50) NOT NULL,
-    email VARCHAR(50),
+    email VARCHAR(50) UNIQUE ,
     contact VARCHAR(50) NOT NULL,
     resignedDate DATE DEFAULT NULL,
     ekind VARCHAR(10),
     PRIMARY KEY (eid),
-    FOREIGN KEY (did) REFERENCES Departments(did)
-    CHECK (type IN {'Junior', 'Senior', 'Manager'})
+    FOREIGN KEY (did) REFERENCES Departments(did),
+    CHECK (ekind IN {'Junior', 'Senior', 'Manager'})
 );
 
 CREATE TABLE Departments(
@@ -43,7 +43,7 @@ CREATE TABLE MeetingRooms(
 
 CREATE TABLE Sessions(
     session_date DATE,
-    session_time TIME,
+    session_time INTEGER CHECK(session_time BETWEEN 0 AND 23),
     session_floor INTEGER,
     session_room INTEGER,
     participant_id INTEGER ,
