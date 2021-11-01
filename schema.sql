@@ -34,7 +34,7 @@ CREATE TABLE MeetingRooms(
     floors INTEGER,
     room INTEGER,
     rname VARCHAR(50) NOT NULL,
-    capacity INTEGER,
+    capacity INTEGER DEFAULT 200,
     update_date DATE,
     did INTEGER ,
     PRIMARY KEY (floors, room),
@@ -58,11 +58,11 @@ CREATE TABLE Sessions(
 
 CREATE TABLE Updates(
     date DATE,
-    new_cap INTEGER ,
+    new_cap INTEGER CHECK(new_cap > 0),
     floors INTEGER ,
     room INTEGER ,
     eid INTEGER NOT NULL,
-    PRIMARY KEY (date),
+    PRIMARY KEY (date, floors, room),
     FOREIGN KEY (floors, room) REFERENCES MeetingRooms(floors, room),
     FOREIGN KEY(eid) REFERENCES Employees(eid)
 );
