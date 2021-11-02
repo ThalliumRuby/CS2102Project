@@ -67,6 +67,7 @@ AS $$
 
 $$ LANGUAGE sql;
 
+-- Trigger responsible for update meeting room capacity when there is a relevant record in updates
 CREATE TRIGGER check_room_capacity
     AFTER INSERT OR UPDATE ON Updates
     FOR EACH ROW EXECUTE FUNCTION update_cap();
