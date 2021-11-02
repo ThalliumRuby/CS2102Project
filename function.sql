@@ -2,12 +2,12 @@ CREATE OR REPLACE FUNCTION declear_health
 (e_id  INT, de_date DATE, tem NUMERIC)
 RETURNS VOID AS $$
 DECLARE
-fever_statue BOOLEAN := FALSE
+fever_status BOOLEAN := FALSE
 BEGIN
 	IF tem > 37.5 THEN
-	fever_statue = TURE
+	fever_status = TURE
 	END IF;
-	INSERT INTO healthDeclaration(declareDate, temp, fever, eid) VALUES (de_date, tem, fever_statue, e_id);
+	INSERT INTO healthDeclaration(declareDate, temp, fever, eid) VALUES (de_date, tem, fever_status, e_id);
 END;
 $$ LANGUAGE plpgsql;
 
@@ -18,7 +18,7 @@ FOR EACH ROW EXECUTE FUNCTION check_fever();
 CREATE OR REPLACE FUNCTION check_fever()
 RETURNS TRIGGER AS $$
 BEGIN
-	IF NEW.fever_statue = TRUE THEN
+	IF NEW.fever_status = TRUE THEN
 	RAISE NOTICE 'Run contact tracing on employee' || NEW.eid || 'on date' || NEW.declareDate;
 	END IF;
 END;
