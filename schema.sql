@@ -1,14 +1,10 @@
+DROP VIEW IF EXISTS Junior, Senior, Manager;
 DROP TABLE IF EXISTS healthDeclaration, Employees, Departments, MeetingRooms, Sessions, Updates;
 
-DROP VIEW IF EXISTS Junior, Senior, Manager;
-
-CREATE TABLE healthDeclaration(
-    declareDate DATE,
-    temp NUMERIC(3, 1) NOT NULL,
-    fever BOOLEAN NOT NULL DEFAULT FALSE,
-    eid INTEGER,
-    FOREIGN KEY (eid) REFERENCES Employees(eid),
-    PRIMARY KEY (eid, date)
+CREATE TABLE Departments(
+    did INTEGER,
+    dname VARCHAR(50) NOT NULL,
+    PRIMARY KEY (did)
 );
 
 CREATE TABLE Employees(
@@ -21,13 +17,16 @@ CREATE TABLE Employees(
     ekind VARCHAR(10),
     PRIMARY KEY (eid),
     FOREIGN KEY (did) REFERENCES Departments(did),
-    CHECK (ekind IN {'Junior', 'Senior', 'Manager'})
+    CHECK (ekind IN ('Junior', 'Senior', 'Manager'))
 );
 
-CREATE TABLE Departments(
-    did INTEGER,
-    dname VARCHAR(50) NOT NULL,
-    PRIMARY KEY (did)
+CREATE TABLE healthDeclaration(
+    declareDate DATE,
+    temp NUMERIC(3, 1) NOT NULL,
+    fever BOOLEAN NOT NULL DEFAULT FALSE,
+    eid INTEGER,
+    FOREIGN KEY (eid) REFERENCES Employees(eid),
+    PRIMARY KEY (eid, date)
 );
 
 CREATE TABLE MeetingRooms(
