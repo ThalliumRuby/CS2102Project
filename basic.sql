@@ -81,3 +81,141 @@ IF (NEW.change_date = CURRENT_DATE ) THEN
 END IF;
 END;
 $$ LANGUAGE sql;
+
+CREATE OR REPLACE PROCEDURE book_room(IN floor_no INTEGER , IN room_no INTEGER , IN my_date DATE, IN start_hour INTEGER ,
+IN end_hour INTEGER , IN employee_id INTEGER )
+AS $$
+DECLARE
+isSick BOOLEAN;
+session_count INTEGER := 0;
+insertion_count INTEGER := 0;
+total_session INTEGER := end_hour - start_hour;
+isAvailable BOOLEAN := True;
+meeting_date DATE := my_date;
+
+BEGIN
+-- if the start time is greater than or equal to end time, not allowed
+IF (total_count <= 0)
+THEN
+RAISE EXCEPTION 'Invalid duration';
+END IF;
+-- if the booker is not manager or senior, not allowed
+IF NOT EXISTS (
+    SELECT 1 FROM Senior WHERE eid = employee_id
+    UNION
+    SELECT 1 FROM Manager WHERE eid = employee_id
+)
+THEN
+RAISE EXCEPTION 'You are not allowed to book';
+END IF;
+-- if the booker has not declared health, not allowed
+SELECT fever INTO isSick FROM HealthDeclaration WHERE eid = employee_id AND declareDate = CURRENT_DATE ;
+IF NOT FOUND
+THEN
+RAISE EXCEPTION 'You have not declared health today';
+END IF;
+-- if the booker has fever , not allowed
+IF NOT (isSick IS FALSE)
+THEN
+RAISE EXCEPTION 'You must seek medical attention immediately';
+END IF;
+-- if the session at the time is already booked, not allowed
+LOOP
+EXIT WHEN session_count = total_count;
+IF EXISTS (
+    SELECT 1 FROM sessions WHERE session_date = my_date AND session_time = (start_hour + (session_count))
+                                 AND session_floor = floor_no AND session_room = room_no
+)
+THEN
+isAvailable := FALSE ;
+END IF;
+session_count := session_count + 1;
+END LOOP;
+
+IF NOT (isAvailable IS TRUE )
+THEN
+RAISE EXCEPTION 'Session unavailable';
+END IF;
+-- insert all sessions into sessions table
+LOOP
+EXIT WHEN insertion_count = total_session;
+INSERT INTO Sessions(
+    session_date,
+    session_time,
+    session_floor,
+    session_room,
+    participant_id,
+    booker_id,
+    approver_id
+
+) VALUES(
+    my_date,
+    start_time + insertion_count,
+    floor_no,
+    room_no,
+    employee_id,
+    employee_id,
+    NULL
+        );
+insertion_count := insertion_count + 1;
+END LOOP;
+
+END;
+$$ LANGUAGE sql;
+
+CREATE OR REPLACE PROCEDURE unbook_room(IN floor_no INTEGER, IN room_no INTEGER, IN my_date DATE, IN start_hour INTEGER,
+IN end_hour INTEGER, IN employee_id INTEGER)
+AS $$
+DECLARE
+all_exist BOOLEAN := TRUE;
+session_count INTEGER := 0;
+deletion_count INTEGER := 0;
+total_session INTEGER := end_hour - start_hour;
+BEGIN
+
+IF (total_count <= 0)
+THEN
+RAISE EXCEPTION 'Invalid duration';
+END IF;
+
+IF employee_id NOT IN (SELECT booker_id FROM Sessions WHERE session_date = my_date
+                                                        AND session_time = start_hour
+                                                        AND session_floor = floor_no
+                                                        AND session_room = room_no
+                                                        AND participant_id = employee_id
+)
+THEN
+RAISE EXCEPTION 'Only booker may unbook';
+END IF;
+
+-- checks if the stated sessions exist
+LOOP
+EXIT WHEN session_count = total_session;
+IF NOT EXISTS (
+    SELECT 1 FROM sessions WHERE session_date = my_date
+                             AND session_time = (start_hour + session_count)
+                             AND session_floor = floor_no
+                             AND session_room = room_no
+                             AND participant_id = employee_id
+)
+THEN
+all_exist := FALSE
+END IF;
+session_count := session_count + 1;
+END LOOP;
+
+IF NOT (all_exist IS TRUE)
+THEN
+RAISE EXCEPTION 'Some session(s) do(es) not exist, please correct'
+END IF;
+
+LOOP
+EXIT WHEN deletion_count = total_session;
+DELETE FROM Sessions WHERE session_date = my_date
+                             AND session_time = (start_hour + deletion_count)
+                             AND session_floor = floor_no
+                             AND session_room = room_no;
+deletion_count := deletion_count + 1;
+END LOOP;
+END;
+$$ LANGUAGE sql;
