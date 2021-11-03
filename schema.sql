@@ -26,7 +26,7 @@ CREATE TABLE healthDeclaration(
     fever BOOLEAN NOT NULL DEFAULT FALSE,
     eid INTEGER,
     FOREIGN KEY (eid) REFERENCES Employees(eid),
-    PRIMARY KEY (eid, date)
+    PRIMARY KEY (eid, declareDate)
 );
 
 CREATE TABLE MeetingRooms(
@@ -61,7 +61,7 @@ CREATE TABLE Updates(
     floors INTEGER ,
     room INTEGER ,
     eid INTEGER NOT NULL,
-    PRIMARY KEY (date, floors, room),
+    PRIMARY KEY (dates, floors, room),
     FOREIGN KEY (floors, room) REFERENCES MeetingRooms(floors, room),
     FOREIGN KEY(eid) REFERENCES Employees(eid)
 );
