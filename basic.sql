@@ -42,7 +42,7 @@ INSERT INTO updates VALUES
      room_no,
      my_id
     )
-    ON CONFLICT (date, floors, room) DO UPDATE SET new_capacity = new_cap;
+    ON CONFLICT (dates, floors, room) DO UPDATE SET new_capacity = new_cap;
     new_cap = capacity;
 ELSE
 RAISE EXCEPTION 'Only managers can update capacity';

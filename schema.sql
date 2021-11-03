@@ -56,7 +56,7 @@ CREATE TABLE Sessions(
 );
 
 CREATE TABLE Updates(
-    date DATE,
+    dates DATE,
     new_cap INTEGER CHECK(new_cap > 0),
     floors INTEGER ,
     room INTEGER ,
