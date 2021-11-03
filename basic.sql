@@ -80,7 +80,7 @@ END IF;
 END;
 $$ LANGUAGE sql;
 
-CREATE TRIGGER check_room_capacity
+CREATE OR REPLACE TRIGGER check_room_capacity
     AFTER INSERT OR UPDATE ON Updates
     FOR EACH ROW EXECUTE FUNCTION update_cap();
 
