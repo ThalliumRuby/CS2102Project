@@ -1,39 +1,43 @@
 CREATE OR REPLACE PROCEDURE add_department (IN department_id INT, IN department_name VARCHAR(50) )
 AS $$
-INSERT INTO departments VALUES (department_id , department_name)
-$$ LANGUAGE sql ;
+BEGIN
+    INSERT INTO departments(did, dname) VALUES (department_id , department_name);
+END;
+$$ LANGUAGE PLPGSQL;
 
 -- When a department is removed, all employees in the department are removed too
 CREATE OR REPLACE PROCEDURE remove_department (IN my_did INTEGER)
 AS $$
-DECLARE curs CURSOR FOR (SELECT * FROM Employees WHERE did = my_did);
-        r_row RECORD;
+DECLARE
+curs CURSOR FOR (SELECT * FROM Employees WHERE did = my_did);
+r1 RECORD;
 BEGIN
     OPEN curs;
-    FOR r_row IN curs LOOP
-        UPDATE Employees SET resignedDate = CURRENT_DATE
+    FETCH curs INTO r1;
+    UPDATE Employees SET resignedDate = CURRENT_DATE
             WHERE CURRENT OF curs;
-    END LOOP;
     CLOSE curs;
 DELETE FROM departments WHERE did = my_did;
 END;
-$$ LANGUAGE sql ;
+$$ LANGUAGE PLPGSQL;
 
 
 CREATE OR REPLACE PROCEDURE add_room( IN floor_no INTEGER, IN room_no INTEGER, IN room_name VARCHAR(50), IN capacity INTEGER)
 AS $$
-INSERT INTO meetingrooms
+BEGIN
+    INSERT INTO meetingrooms
        (floors, room, rname, capacity)
        VALUES
-       (floor_no, room_no, room_name, capacity)
-$$ LANGUAGE sql ;
+       (floor_no, room_no, room_name, capacity);
+END;
+$$ LANGUAGE PLPGSQL;
 
 -- Capacity of an meeting room can only be changed from today onwards, past dates have no effect
 -- Only if eid passed is in manager and did matches the meeting room did, update is allowed
 CREATE OR REPLACE PROCEDURE change_capacity(IN floor_no INTEGER, IN room_no INTEGER, IN new_capacity INTEGER, IN change_date DATE, IN my_id INTEGER )
 AS $$
 BEGIN
-IF EXISTS (SELECT 1 FROM Manager WHERE eid = my_id)
+IF (SELECT COUNT(*) FROM Manager WHERE eid = my_id) >= 1
 THEN
 INSERT INTO updates VALUES
     (change_date,
@@ -43,57 +47,59 @@ INSERT INTO updates VALUES
      my_id
     )
     ON CONFLICT (dates, floors, room) DO UPDATE SET new_capacity = new_cap;
-    new_cap = capacity;
 ELSE
 RAISE EXCEPTION 'Only managers can update capacity';
 END IF;
 END;
-$$ LANGUAGE sql;
+$$ LANGUAGE PLPGSQL;
 
 -- Ensure unique eid by increasing subsequent eid by 1
 CREATE OR REPLACE PROCEDURE add_employee(IN employee_name VARCHAR(50), IN contact_num INTEGER, IN kind VARCHAR(10), IN department_id INTEGER)
 AS $$
-DECLARE my_eid INTEGER;
-my_eid := SELECT MAX(eid) FROM Employees;
+DECLARE
+my_eid INT;
+BEGIN
+    SELECT MAX(eid) INTO my_eid FROM Employees;
 	INSERT INTO Employees (eid, did, ename, contact, ekind)
 		VALUES(my_eid +1, department_id, employee_name, contact_num, kind);
-		
-$$ LANGUAGE sql;
+END;
+$$ LANGUAGE PLPGSQL;
 
 -- Remove an employee by setting the resigned date
 CREATE OR REPLACE PROCEDURE remove_employee(IN employee_id INTEGER, IN retired_date DATE)
 AS $$
-	UPDATE Employees
-	SET resignedDate = retired_date
-    WHERE eid = employee_id;
-
-$$ LANGUAGE sql;
+BEGIN
+	UPDATE Employees SET resignedDate = retired_date WHERE eid = employee_id;
+END;
+$$ LANGUAGE PLPGSQL;
 
 -- Trigger responsible for update meeting room capacity when there is a relevant record in updates
-CREATE OR REPLACE FUNCTION update_cap()
-RETURN TRIGGER AS $$
+CREATE OR REPLACE PROCEDURE update_cap()
+  RETURNS TRIGGER
+AS $$
 BEGIN
-IF (NEW.change_date = CURRENT_DATE ) THEN
-    UPDATE MeetingRooms SET capacity = NEW.new_capacity WHERE floors = NEW.floor_no AND room = NEW.room_no;
-    UPDATE MeetingRooms SET update_date = NEW.change_date WHERE floors = NEW.floor_no AND room = NEW.room_no;
-END IF;
+    IF (NEW.change_date = CURRENT_DATE ) THEN
+        UPDATE MeetingRooms SET capacity = NEW.new_capacity WHERE floors = NEW.floor_no AND room = NEW.room_no;
+        UPDATE MeetingRooms SET update_date = NEW.change_date WHERE floors = NEW.floor_no AND room = NEW.room_no;
+    END IF;
+    RETURN NEW;
 END;
-$$ LANGUAGE sql;
+$$ LANGUAGE PLPGSQL;
 
-CREATE OR REPLACE TRIGGER check_room_capacity
-    AFTER INSERT OR UPDATE ON Updates
-    FOR EACH ROW EXECUTE FUNCTION update_cap();
+CREATE OR REPLACE TRIGGER check_room_capacity AFTER
+    INSERT OR UPDATE ON Updates
+    FOR EACH ROW EXECUTE PROCEDURE update_cap();
 
 
 CREATE OR REPLACE PROCEDURE book_room(IN floor_no INTEGER , IN room_no INTEGER , IN my_date DATE, IN start_hour INTEGER ,
 IN end_hour INTEGER , IN employee_id INTEGER )
 AS $$
 DECLARE
-isSick BOOLEAN;
+isSick BOOL;
 session_count INTEGER := 0;
 insertion_count INTEGER := 0;
 total_session INTEGER := end_hour - start_hour;
-isAvailable BOOLEAN := True;
+isAvailable BOOL := True;
 meeting_date DATE := my_date;
 
 BEGIN
@@ -164,13 +170,13 @@ insertion_count := insertion_count + 1;
 END LOOP;
 
 END;
-$$ LANGUAGE sql;
+$$ LANGUAGE PLPGSQL;
 
 CREATE OR REPLACE PROCEDURE unbook_room(IN floor_no INTEGER, IN room_no INTEGER, IN my_date DATE, IN start_hour INTEGER,
 IN end_hour INTEGER, IN employee_id INTEGER)
 AS $$
 DECLARE
-all_exist BOOLEAN := TRUE;
+all_exist BOOL := TRUE;
 session_count INTEGER := 0;
 deletion_count INTEGER := 0;
 total_session INTEGER := end_hour - start_hour;
@@ -209,7 +215,7 @@ END LOOP;
 
 IF NOT (all_exist IS TRUE)
 THEN
-RAISE EXCEPTION 'Some session(s) do(es) not exist, please correct'
+RAISE EXCEPTION 'Some session(s) do(es) not exist, please correct';
 END IF;
 
 LOOP
@@ -220,5 +226,6 @@ DELETE FROM Sessions WHERE session_date = my_date
                              AND session_room = room_no;
 deletion_count := deletion_count + 1;
 END LOOP;
+
 END;
-$$ LANGUAGE sql;
+$$ LANGUAGE PLPGSQL;
