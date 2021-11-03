@@ -208,7 +208,7 @@ IF NOT EXISTS (
                              AND participant_id = employee_id
 )
 THEN
-all_exist := FALSE
+all_exist := FALSE;
 END IF;
 session_count := session_count + 1;
 END LOOP;
