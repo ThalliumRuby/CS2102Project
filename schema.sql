@@ -52,7 +52,8 @@ CREATE TABLE Sessions(
     PRIMARY KEY (session_date,session_time, session_floor, session_room, participant_id),
     FOREIGN KEY(session_floor, session_room) REFERENCES MeetingRooms(floors, room),
     FOREIGN KEY(participant_id) REFERENCES Employees(eid),
-    FOREIGN KEY(booker_id) REFERENCES Employees(eid)
+    FOREIGN KEY(booker_id) REFERENCES Employees(eid),
+    FOREIGN KEY(approver_id) REFERENCES Employees(eid)
 );
 
 CREATE TABLE Updates(

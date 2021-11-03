@@ -23,7 +23,7 @@ $$ LANGUAGE sql ;
 CREATE OR REPLACE PROCEDURE add_room( IN floor_no INTEGER, IN room_no INTEGER, IN room_name VARCHAR(50), IN capacity INTEGER)
 AS $$
 INSERT INTO meetingrooms
-       (floor, room, rname, capacity)
+       (floors, room, rname, capacity)
        VALUES
        (floor_no, room_no, room_name, capacity)
 $$ LANGUAGE sql ;
@@ -53,8 +53,10 @@ $$ LANGUAGE sql;
 -- Ensure unique eid by increasing subsequent eid by 1
 CREATE OR REPLACE PROCEDURE add_employee(IN employee_name VARCHAR(50), IN contact_num INTEGER, IN kind VARCHAR(10), IN department_id INTEGER)
 AS $$
+DECLARE my_eid INTEGER;
+my_eid := SELECT MAX(eid) FROM Employees;
 	INSERT INTO Employees (eid, did, ename, contact, ekind)
-		VALUES(max(eid)+1, department_id, employee_name, contact_num, kind);
+		VALUES(my_eid +1, department_id, employee_name, contact_num, kind);
 		
 $$ LANGUAGE sql;
 
@@ -68,10 +70,6 @@ AS $$
 $$ LANGUAGE sql;
 
 -- Trigger responsible for update meeting room capacity when there is a relevant record in updates
-CREATE TRIGGER check_room_capacity
-    AFTER INSERT OR UPDATE ON Updates
-    FOR EACH ROW EXECUTE FUNCTION update_cap();
-
 CREATE OR REPLACE FUNCTION update_cap()
 RETURN TRIGGER AS $$
 BEGIN
@@ -81,6 +79,11 @@ IF (NEW.change_date = CURRENT_DATE ) THEN
 END IF;
 END;
 $$ LANGUAGE sql;
+
+CREATE TRIGGER check_room_capacity
+    AFTER INSERT OR UPDATE ON Updates
+    FOR EACH ROW EXECUTE FUNCTION update_cap();
+
 
 CREATE OR REPLACE PROCEDURE book_room(IN floor_no INTEGER , IN room_no INTEGER , IN my_date DATE, IN start_hour INTEGER ,
 IN end_hour INTEGER , IN employee_id INTEGER )
