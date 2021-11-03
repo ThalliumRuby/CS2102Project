@@ -13,9 +13,13 @@ curs CURSOR FOR (SELECT * FROM Employees WHERE did = my_did);
 r1 RECORD;
 BEGIN
     OPEN curs;
+    LOOP
     FETCH curs INTO r1;
+    EXIT WHEN r1 IS NULL;
     UPDATE Employees SET resignedDate = CURRENT_DATE
             WHERE CURRENT OF curs;
+    MOVE curs;
+    END LOOP;
     CLOSE curs;
 DELETE FROM departments WHERE did = my_did;
 END;
