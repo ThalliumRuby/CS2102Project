@@ -1,26 +1,3 @@
-CREATE OR REPLACE PROCEDURE initiate_db() AS $$
-BEGIN
-	CALL ini_department();
-	CALL ini_employee();
-	CALL ini_rooms();
-	CALL ini_healthrecord();
-	CALL ini_sessions();
-END;
-$$ LANGUAGE sql;
-
-CREATE OR REPLACE PROCEDURE test_basic_function() AS $$
-BEGIN	
-	CALL test_updates();
-END;
-$$ LANGUAGE sql;
-
-CREATE OR REPLACE PROCEDURE test_function() AS $$
-BEGIN	
-END;
-$$ LANGUAGE sql;
-
-CREATE OR REPLACE PROCEDURE ini_department() AS $$
-BEGIN
 	insert into Departments (did, dname) values (1, 'Training');
 	insert into Departments (did, dname) values (2, 'Human Resources');
 	insert into Departments (did, dname) values (3, 'Engineering');
@@ -46,11 +23,7 @@ BEGIN
 	insert into Departments (did, dname) values (23, 'Business Development');
 	insert into Departments (did, dname) values (24, 'Legal');
 	insert into Departments (did, dname) values (25, 'Accounting');
-END;
-$$ LANGUAGE sql;
 
-CREATE OR REPLACE PROCEDURE ini_employee() AS $$
-BEGIN
 	insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (1, 5, 'Tallia', 'e1@myCompany.com', '734-531-1103', '9/30/2019', 'Senior');
 	insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (2, 22, 'Ardene', 'e2@myCompany.com', '665-231-0398', null, 'Junior');
 	insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (3, 14, 'Kristofor', 'e3@myCompany.com', '222-139-9594', '12/11/2019', 'Senior');
@@ -452,11 +425,6 @@ BEGIN
 	insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (399, 16, 'Lawry', 'e399@myCompany.com', '233-895-9216', null, 'Junior');
 	insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (400, 13, 'Lula', 'e400@myCompany.com', '526-119-3050', null, 'Senior');
 
-END;
-$$ LANGUAGE sql;
-
-CREATE OR REPLACE PROCEDURE ini_rooms() AS $$
-BEGIN
 	insert into MeetingRooms (floors, room, rname, capacity, update_date, did) values (2, 1, 'Klein Group', 47, '5/29/2020', 18);
 	insert into MeetingRooms (floors, room, rname, capacity, update_date, did) values (2, 2, 'Trantow, Wisozk and Roob', 11, '8/2/2021', 3);
 	insert into MeetingRooms (floors, room, rname, capacity, update_date, did) values (2, 3, 'Wunsch, Beahan and Schmidt', 23, '5/23/2020', 3);
@@ -807,11 +775,7 @@ BEGIN
 	insert into MeetingRooms (floors, room, rname, capacity, update_date, did) values (9, 33, 'Wisoky Inc', 23, '1/2/2019', 22);
 	insert into MeetingRooms (floors, room, rname, capacity, update_date, did) values (9, 34, 'Larson Inc', 6, '11/22/2020', 25);
 	insert into MeetingRooms (floors, room, rname, capacity, update_date, did) values (9, 35, 'Schumm, Kreiger and Altenwerth', 13, '1/13/2019', 15);
-END;
-$$ LANGUAGE sql;
 
-CREATE OR REPLACE PROCEDURE ini_healthrecord() AS $$
-BEGIN
 	insert into healthDeclaration (declareDate, temp, eid) values ('3/1/2020', 36.0, 364);
 	insert into healthDeclaration (declareDate, temp, eid) values ('9/15/2021', 37.6, 131);
 	insert into healthDeclaration (declareDate, temp, eid) values ('4/21/2020', 37.8, 225);
@@ -913,11 +877,6 @@ BEGIN
 	insert into healthDeclaration (declareDate, temp, eid) values ('11/13/2020', 39.8, 153);
 	insert into healthDeclaration (declareDate, temp, eid) values ('4/2/2020', 35.4, 94);
 
-END;
-$$ LANGUAGE sql;
-
-CREATE OR REPLACE PROCEDURE ini_sessions() AS $$
-BEGIN
 	insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('6/26/2020', 6, 6, 9, 359, 367, null, 143);
 	insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('12/28/2022', 11, 3, 14, 383, 56, false, 30);
 	insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/5/2021', 23, 10, 13, 73, 378, true, 288);
@@ -1018,11 +977,7 @@ BEGIN
 	insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('5/8/2021', 6, 10, 30, 236, 129, false, 136);
 	insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('5/6/2022', 13, 1, 31, 187, 30, null, 133);
 	insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('6/12/2022', 13, 10, 33, 37, 354, true, 65);
-END;
-$$ LANGUAGE sql;
 
-CREATE OR REPLACE PROCEDURE test_updates() AS $$
-BEGIN
 	insert into Updates (dates, new_cap, floors, room, eid) values ('3/17/2022', 1, 1, 23, 7);
 	insert into Updates (dates, new_cap, floors, room, eid) values ('12/4/2021', 1, 3, 17, 263);
 	insert into Updates (dates, new_cap, floors, room, eid) values ('3/17/2022', 3, 8, 46, 312);
@@ -1043,5 +998,3 @@ BEGIN
 	insert into Updates (dates, new_cap, floors, room, eid) values ('7/11/2022', 9, 33, 42, 124);
 	insert into Updates (dates, new_cap, floors, room, eid) values ('5/17/2022', 7, 2, 27, 302);
 	insert into Updates (dates, new_cap, floors, room, eid) values ('4/28/2022', 1, 9, 31, 141);
-END;
-$$ LANGUAGE sql;
