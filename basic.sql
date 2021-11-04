@@ -13,6 +13,7 @@ curs CURSOR FOR (SELECT * FROM Employees WHERE did = my_did);
 r1 RECORD;
 replacing_did INTEGER ;
 BEGIN
+-- when a department is removed, employee transferred to the general department of 1
     SELECT MIN(did) INTO replacing_did FROM Departments;
     OPEN curs;
     LOOP
@@ -43,7 +44,17 @@ $$ LANGUAGE PLPGSQL;
 -- Only if eid passed is in manager and did matches the meeting room did, update is allowed
 CREATE OR REPLACE PROCEDURE change_capacity(IN floor_no INTEGER, IN room_no INTEGER, IN new_capacity INTEGER, IN change_date DATE, IN my_id INTEGER )
 AS $$
+DECLARE
+manager_did INTEGER ;
+room_did INTEGER ;
 BEGIN
+SELECT did INTO manager_did FROM Employees WHERE eid = my_id;
+SELECT did INTO room_did FROM MeetingRooms WHERE floors = floor_no AND room = room_no;
+IF NOT (manager_did = room_did)
+THEN
+RAISE EXCEPTION 'Only manager from the same department may update capacity';
+END IF;
+
 IF (SELECT COUNT(*) FROM Manager WHERE eid = my_id) >= 1
 THEN
 INSERT INTO updates (
@@ -106,7 +117,7 @@ CREATE TRIGGER check_room_capacity AFTER
     FOR EACH ROW EXECUTE PROCEDURE update_cap();
 
 
-
+-- 2 of the core functions
 CREATE OR REPLACE PROCEDURE book_room(IN floor_no INTEGER , IN room_no INTEGER , IN my_date DATE, IN start_hour INTEGER ,
 IN end_hour INTEGER , IN employee_id INTEGER )
 AS $$
@@ -117,13 +128,21 @@ insertion_count INTEGER := 0;
 total_session INTEGER := end_hour - start_hour;
 isAvailable BOOL := True;
 meeting_date DATE := my_date;
-
+booker_did INTEGER ;
+room_did INTEGER ;
 BEGIN
 -- if the start time is greater than or equal to end time, not allowed
 SELECT (end_hour - start_hour) INTO total_session;
+SELECT did INTO booker_did FROM Employees WHERE eid = employee_id;
+SELECT did INTO room_did FROM MeetingRooms WHERE floors = floor_no AND room = room_no;
 IF (total_session <= 0)
 THEN
 RAISE EXCEPTION 'Invalid duration';
+END IF;
+-- if department of booker and room does not match, not allowed
+IF NOT booker_did = room_did
+THEN
+RAISE EXCEPTION 'You can only book meeting rooms in your department';
 END IF;
 -- if the booker is not manager or senior, not allowed
 IF NOT EXISTS (

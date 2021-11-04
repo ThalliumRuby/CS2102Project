@@ -35,7 +35,7 @@ CREATE TABLE MeetingRooms(
     rname VARCHAR(50) NOT NULL,
     capacity INTEGER DEFAULT 200,
     update_date DATE,
-    did INTEGER ,
+    did INTEGER NOT NULL,
     PRIMARY KEY (floors, room),
     FOREIGN KEY (did) REFERENCES Departments(did)
 );
