@@ -11,12 +11,14 @@ AS $$
 DECLARE
 curs CURSOR FOR (SELECT * FROM Employees WHERE did = my_did);
 r1 RECORD;
+replacing_did INTEGER ;
 BEGIN
+    SELECT MIN(did) INTO replacing_did FROM Departments;
     OPEN curs;
     LOOP
     FETCH curs INTO r1;
     EXIT WHEN r1 IS NULL;
-    UPDATE Employees SET resignedDate = CURRENT_DATE
+    UPDATE Employees SET did = replacing_did
             WHERE CURRENT OF curs;
     MOVE curs;
     END LOOP;
@@ -102,6 +104,7 @@ $$ LANGUAGE PLPGSQL;
 CREATE TRIGGER check_room_capacity AFTER
     INSERT OR UPDATE ON Updates
     FOR EACH ROW EXECUTE PROCEDURE update_cap();
+
 
 
 CREATE OR REPLACE PROCEDURE book_room(IN floor_no INTEGER , IN room_no INTEGER , IN my_date DATE, IN start_hour INTEGER ,
