@@ -79,6 +79,8 @@ END;
 $$ LANGUAGE PLPGSQL;
 
 -- Trigger responsible for update meeting room capacity when there is a relevant record in updates
+DROP TRIGGER IF EXISTS check_room_capacity ON Updates;
+
 CREATE OR REPLACE FUNCTION update_cap()
   RETURNS TRIGGER
 AS $$
@@ -91,7 +93,7 @@ BEGIN
 END;
 $$ LANGUAGE PLPGSQL;
 
-CREATE OR REPLACE TRIGGER check_room_capacity AFTER
+CREATE TRIGGER check_room_capacity AFTER
     INSERT OR UPDATE ON Updates
     FOR EACH ROW EXECUTE PROCEDURE update_cap();
 
