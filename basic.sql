@@ -26,13 +26,14 @@ END;
 $$ LANGUAGE PLPGSQL;
 
 
-CREATE OR REPLACE PROCEDURE add_room( IN floor_no INTEGER, IN room_no INTEGER, IN room_name VARCHAR(50), IN capacity INTEGER)
+CREATE OR REPLACE PROCEDURE add_room( IN floor_no INTEGER, IN room_no INTEGER,
+                                      IN room_name VARCHAR(50), IN capacity INTEGER, IN my_did INTEGER )
 AS $$
 BEGIN
     INSERT INTO meetingrooms
-       (floors, room, rname, capacity)
+       (floors, room, rname, capacity, did)
        VALUES
-       (floor_no, room_no, room_name, capacity);
+       (floor_no, room_no, room_name, capacity, my_did);
 END;
 $$ LANGUAGE PLPGSQL;
 
@@ -78,7 +79,7 @@ END;
 $$ LANGUAGE PLPGSQL;
 
 -- Trigger responsible for update meeting room capacity when there is a relevant record in updates
-CREATE OR REPLACE PROCEDURE update_cap()
+CREATE OR REPLACE FUNCTION update_cap()
   RETURNS TRIGGER
 AS $$
 BEGIN
@@ -108,7 +109,8 @@ meeting_date DATE := my_date;
 
 BEGIN
 -- if the start time is greater than or equal to end time, not allowed
-IF (total_count <= 0)
+SELECT (end_hour - start_hour) INTO total_session;
+IF (total_session <= 0)
 THEN
 RAISE EXCEPTION 'Invalid duration';
 END IF;
@@ -134,7 +136,7 @@ RAISE EXCEPTION 'You must seek medical attention immediately';
 END IF;
 -- if the session at the time is already booked, not allowed
 LOOP
-EXIT WHEN session_count = total_count;
+EXIT WHEN session_count = total_session;
 IF EXISTS (
     SELECT 1 FROM sessions WHERE session_date = my_date AND session_time = (start_hour + (session_count))
                                  AND session_floor = floor_no AND session_room = room_no
@@ -163,7 +165,7 @@ INSERT INTO Sessions(
 
 ) VALUES(
     my_date,
-    start_time + insertion_count,
+    start_hour + insertion_count,
     floor_no,
     room_no,
     employee_id,
@@ -186,7 +188,7 @@ deletion_count INTEGER := 0;
 total_session INTEGER := end_hour - start_hour;
 BEGIN
 
-IF (total_count <= 0)
+IF (total_session <= 0)
 THEN
 RAISE EXCEPTION 'Invalid duration';
 END IF;

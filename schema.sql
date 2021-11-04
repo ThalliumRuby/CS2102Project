@@ -2,7 +2,7 @@ DROP VIEW IF EXISTS Junior, Senior, Manager;
 DROP TABLE IF EXISTS healthDeclaration, Employees, Departments, MeetingRooms, Sessions, Updates;
 
 CREATE TABLE Departments(
-    did INTEGER,
+    did INTEGER ,
     dname VARCHAR(50) NOT NULL,
     PRIMARY KEY (did)
 );
