@@ -5,7 +5,7 @@ BEGIN
 END;
 $$ LANGUAGE PLPGSQL;
 
--- When a department is removed, all employees in the department are removed too
+-- When a department is removed, all employees in the department are replaced to department 1
 CREATE OR REPLACE PROCEDURE remove_department (IN my_did INTEGER)
 AS $$
 DECLARE
@@ -20,8 +20,8 @@ BEGIN
     FETCH curs INTO r1;
     EXIT WHEN r1 IS NULL;
     UPDATE Employees SET did = replacing_did
-            WHERE CURRENT OF curs;
-    MOVE curs;
+            WHERE r1.did = did;
+    --MOVE curs;
     END LOOP;
     CLOSE curs;
 DELETE FROM departments WHERE did = my_did;
@@ -116,6 +116,45 @@ CREATE TRIGGER check_room_capacity AFTER
     INSERT OR UPDATE ON Updates
     FOR EACH ROW EXECUTE PROCEDURE update_cap();
 
+-- Trigger responsible for removing future meetings with more participants than new capacity
+DROP TRIGGER IF EXISTS remove_large_meeting ON MeetingRooms;
+
+CREATE OR REPLACE FUNCTION remove_meeting()
+  RETURNS TRIGGER
+AS $$
+DECLARE curs CURSOR FOR (SELECT session_date, session_time, session_floor, session_room, COUNT(*) AS people_count
+    FROM (SELECT * FROM Sessions
+    WHERE session_date >= NEW.update_date) AS all_sessions
+    GROUP BY session_date, session_time, session_floor, session_room);
+    r1 RECORD;
+BEGIN
+--WITH all_sessions AS (
+    --SELECT * FROM Sessions
+    --WHERE session_date >= NEW.update_date
+--) count_session_participants AS(
+    --SELECT session_date, session_time, session_floor, session_room, COUNT(*) AS people_count
+    --FROM all_sessions
+    --GROUP BY session_date, session_time, session_floor, session_room
+--)
+    OPEN curs;
+    LOOP
+    FETCH curs INTO r1;
+    EXIT WHEN r1 IS NULL;
+    IF r1.people_count > NEW.capacity
+    THEN
+    DELETE FROM sessions WHERE session_date = r1.session_date AND session_time = r1.session_time
+                              AND session_floor = r1.session_floor AND session_room = r1.session_room;
+    END IF;
+    --MOVE curs;
+    END LOOP;
+    CLOSE curs;
+    RETURN NEW;
+END;
+$$ LANGUAGE PLPGSQL;
+
+CREATE TRIGGER remove_large_meeting AFTER
+    INSERT OR UPDATE ON MeetingRooms
+    FOR EACH ROW EXECUTE FUNCTION remove_meeting();
 
 -- 2 of the core functions
 CREATE OR REPLACE PROCEDURE book_room(IN floor_no INTEGER , IN room_no INTEGER , IN my_date DATE, IN start_hour INTEGER ,
