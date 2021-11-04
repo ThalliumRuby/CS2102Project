@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION declear_health
+CREATE OR REPLACE FUNCTION declare_health
 (e_id  INT, de_date DATE, tem NUMERIC)
 RETURNS VOID AS $$
 DECLARE
