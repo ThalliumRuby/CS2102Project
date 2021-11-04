@@ -31,9 +31,9 @@ CREATE OR REPLACE PROCEDURE add_room( IN floor_no INTEGER, IN room_no INTEGER,
 AS $$
 BEGIN
     INSERT INTO meetingrooms
-       (floors, room, rname, capacity, did)
+       (floors, room, rname, capacity, did, update_date)
        VALUES
-       (floor_no, room_no, room_name, capacity, my_did);
+       (floor_no, room_no, room_name, capacity, my_did, CURRENT_DATE );
 END;
 $$ LANGUAGE PLPGSQL;
 
@@ -44,14 +44,20 @@ AS $$
 BEGIN
 IF (SELECT COUNT(*) FROM Manager WHERE eid = my_id) >= 1
 THEN
-INSERT INTO updates VALUES
+INSERT INTO updates (
+    dates,
+    new_cap,
+    floors,
+    room,
+    eid
+) VALUES
     (change_date,
      new_capacity,
      floor_no,
      room_no,
      my_id
     )
-    ON CONFLICT (dates, floors, room) DO UPDATE SET new_capacity = new_cap;
+    ON CONFLICT (dates, floors, room) DO UPDATE SET new_cap = new_capacity;
 ELSE
 RAISE EXCEPTION 'Only managers can update capacity';
 END IF;
@@ -85,9 +91,9 @@ CREATE OR REPLACE FUNCTION update_cap()
   RETURNS TRIGGER
 AS $$
 BEGIN
-    IF (NEW.change_date = CURRENT_DATE ) THEN
-        UPDATE MeetingRooms SET capacity = NEW.new_capacity WHERE floors = NEW.floor_no AND room = NEW.room_no;
-        UPDATE MeetingRooms SET update_date = NEW.change_date WHERE floors = NEW.floor_no AND room = NEW.room_no;
+    IF (NEW.dates = CURRENT_DATE ) THEN
+        UPDATE MeetingRooms SET capacity = NEW.new_cap WHERE floors = NEW.floors AND room = NEW.room;
+        UPDATE MeetingRooms SET update_date = NEW.dates WHERE floors = NEW.floors AND room = NEW.room;
     END IF;
     RETURN NEW;
 END;
