@@ -5588,3 +5588,5 @@ insert into Updates (floors, room, rname, new_cap, dates, eid) values (5, 7, 260
 insert into Updates (floors, room, rname, new_cap, dates, eid) values (5, 8, 50, '10/21/2021', 37);
 insert into Updates (floors, room, rname, new_cap, dates, eid) values (5, 9, 100, '8/7/2019', 34);
 insert into Updates (floors, room, rname, new_cap, dates, eid) values (5, 10, 100, '1/5/2019', 101);
+
+UPDATE healthDeclaration SET fever = TRUE WHERE temp > 37.5;
