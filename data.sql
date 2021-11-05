@@ -109,7 +109,7 @@ insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) val
 insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (87, 4, 'Trina', 'e087@mycompany.com', '519-963-1211', null, 'Junior');
 insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (88, 15, 'Milissent', 'e088@mycompany.com', '333-361-5796', null, 'Senior');
 insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (89, 2, 'Hubey', 'e089@mycompany.com', '705-415-3278', null, 'Senior');
-insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (90, 9, 'Nady', 'e090@mycompany.com', '676-422-5131', 06/15/2021, 'Junior');
+insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (90, 9, 'Nady', 'e090@mycompany.com', '676-422-5131', '06/15/2021', 'Junior');
 insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (91, 7, 'Claude', 'e091@mycompany.com', '525-359-5733', null, 'Senior');
 insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (92, 1, 'Jsandye', 'e092@mycompany.com', '154-749-4257', null, 'Manager');
 insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (93, 10, 'Tristan', 'e093@mycompany.com', '741-316-5632', null, 'Senior');
@@ -166,7 +166,7 @@ insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) val
 insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (144, 8, 'Brinn', 'e0144@mycompany.com', '509-227-8082', null, 'Junior');
 insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (145, 14, 'Patrizius', 'e0145@mycompany.com', '685-344-5047', null, 'Manager');
 insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (146, 10, 'Millisent', 'e0146@mycompany.com', '555-608-9667', null, 'Senior');
-insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (147, 11, 'Kerby', 'e0147@mycompany.com', '484-661-6163', 09/30/2021, 'Junior');
+insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (147, 11, 'Kerby', 'e0147@mycompany.com', '484-661-6163', '09/30/2021', 'Junior');
 insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (148, 3, 'Wright', 'e0148@mycompany.com', '512-768-9512', null, 'Manager');
 insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (149, 15, 'Nicolette', 'e0149@mycompany.com', '400-347-0249', null, 'Senior');
 insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (150, 5, 'Richie', 'e0150@mycompany.com', '713-953-4150', null, 'Senior');
