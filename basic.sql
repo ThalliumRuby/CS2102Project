@@ -341,6 +341,16 @@ THEN
 RAISE EXCEPTION 'Invalid duration, please check';
 END IF;
 
+IF (my_date < CURRENT_DATE )
+THEN
+RAISE EXCEPTION 'Meeting has past, cannot unbook';
+END IF;
+
+IF NOT EXISTS (SELECT * FROM MeetingRooms WHERE floors = floor_no AND room = room_no)
+THEN
+RAISE EXCEPTION 'Invalid meeting room, please correct';
+END IF;
+
 -- checks if the stated sessions exist
 WHILE (session_count < total_session) LOOP
 IF NOT EXISTS (
