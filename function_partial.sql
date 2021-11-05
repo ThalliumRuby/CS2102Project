@@ -83,7 +83,7 @@ BEGIN
 
 	SELECT new_cap INTO max_cap
 	FROM Updates U
-	WHERE dates <= CURRENT_DATE 
+	WHERE dates <= NEW.session_date 
 	AND U.floors = NEW.session_floor 
 	AND U.room = NEW.session_room
 	ORDER BY dates DESC
