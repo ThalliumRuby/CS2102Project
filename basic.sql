@@ -242,6 +242,11 @@ SELECT did INTO booker_did FROM Employees WHERE eid = employee_id;
 SELECT did INTO room_did FROM MeetingRooms WHERE floors = floor_no AND room = room_no;
 SELECT resignedDate INTO leaving_date FROM Employees WHERE eid = employee_id;
 
+IF NOT EXISTS (SELECT * FROM MeetingRooms WHERE floors = floor_no AND room = room_no)
+THEN
+RAISE EXCEPTION 'Invalid meeting room, please correct';
+END IF;
+
 IF NOT (leaving_date IS NULL) AND leaving_date <= CURRENT_DATE
 THEN
 RAISE EXCEPTION 'You have left, cannot book meeting';
