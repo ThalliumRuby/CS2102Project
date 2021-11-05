@@ -11,6 +11,8 @@ AS $$
 DECLARE
 curs CURSOR FOR (SELECT * FROM Employees WHERE did = my_did);
 r1 RECORD;
+curs2 CURSOR FOR (SELECT * FROM MeetingRooms WHERE did = my_did);
+r2 RECORD;
 replacing_did INTEGER ;
 BEGIN
 -- when a department is removed, employee transferred to the general department of 1
@@ -21,9 +23,16 @@ BEGIN
     EXIT WHEN r1 IS NULL;
     UPDATE Employees SET did = replacing_did
             WHERE r1.did = did;
-    --MOVE curs;
     END LOOP;
     CLOSE curs;
+    OPEN curs2;
+    LOOP
+    FETCH curs2 INTO r2;
+    EXIT WHEN r2 IS NULL;
+    UPDATE MeetingRooms SET did = replacing_did
+            WHERE r2.did = did;
+    END LOOP;
+    CLOSE curs2;
 DELETE FROM departments WHERE did = my_did;
 END;
 $$ LANGUAGE PLPGSQL;
@@ -40,8 +49,9 @@ BEGIN
 END;
 $$ LANGUAGE PLPGSQL;
 
--- Capacity of an meeting room can only be changed from today onwards, past dates have no effect
+-- Capacity of an meeting room can only be changed from today onwards, past and future dates have no effect
 -- Only if eid passed is in manager and did matches the meeting room did, update is allowed
+-- Only the lastest entry is stored if there are multiple updates with the same date on the same room
 CREATE OR REPLACE PROCEDURE change_capacity(IN floor_no INTEGER, IN room_no INTEGER, IN new_capacity INTEGER, IN change_date DATE, IN my_id INTEGER )
 AS $$
 DECLARE
@@ -55,8 +65,11 @@ THEN
 RAISE EXCEPTION 'Only manager from the same department may update capacity';
 END IF;
 
-IF (SELECT COUNT(*) FROM Manager WHERE eid = my_id) >= 1
+IF NOT (SELECT COUNT(*) FROM Manager WHERE eid = my_id) >= 1
 THEN
+RAISE EXCEPTION 'Only managers can update capacity';
+END IF;
+
 INSERT INTO updates (
     dates,
     new_cap,
@@ -71,9 +84,6 @@ INSERT INTO updates (
      my_id
     )
     ON CONFLICT (dates, floors, room) DO UPDATE SET new_cap = new_capacity;
-ELSE
-RAISE EXCEPTION 'Only managers can update capacity';
-END IF;
 END;
 $$ LANGUAGE PLPGSQL;
 
@@ -128,14 +138,6 @@ DECLARE curs CURSOR FOR (SELECT session_date, session_time, session_floor, sessi
     GROUP BY session_date, session_time, session_floor, session_room);
     r1 RECORD;
 BEGIN
---WITH all_sessions AS (
-    --SELECT * FROM Sessions
-    --WHERE session_date >= NEW.update_date
---) count_session_participants AS(
-    --SELECT session_date, session_time, session_floor, session_room, COUNT(*) AS people_count
-    --FROM all_sessions
-    --GROUP BY session_date, session_time, session_floor, session_room
---)
     OPEN curs;
     LOOP
     FETCH curs INTO r1;
@@ -145,7 +147,6 @@ BEGIN
     DELETE FROM sessions WHERE session_date = r1.session_date AND session_time = r1.session_time
                               AND session_floor = r1.session_floor AND session_room = r1.session_room;
     END IF;
-    --MOVE curs;
     END LOOP;
     CLOSE curs;
     RETURN NEW;
@@ -156,6 +157,45 @@ CREATE TRIGGER remove_large_meeting AFTER
     INSERT OR UPDATE ON MeetingRooms
     FOR EACH ROW EXECUTE FUNCTION remove_meeting();
 
+DROP TRIGGER IF EXISTS remove_resigned_employee ON Sessions;
+
+CREATE OR REPLACE FUNCTION remove_from_future_meeting()
+  RETURNS TRIGGER
+AS $$
+DECLARE
+    leaving_date DATE;
+    curs CURSOR FOR (SELECT * FROM sessions WHERE participant_id = NEW.eid
+                 UNION SELECT * FROM Sessions WHERE booker_id = NEW.eid);
+    r1 RECORD;
+BEGIN
+SELECT NEW.resignedDate INTO leaving_date;
+IF NOT (leaving_date IS NULL)
+THEN
+    OPEN curs;
+    LOOP
+    FETCH curs INTO r1;
+    EXIT WHEN r1 IS NULL;
+    IF (r1.session_date >= leaving_date)
+    THEN
+    DELETE FROM sessions WHERE session_date = r1.session_date AND session_time = r1.session_time
+                            AND session_floor = r1.session_floor AND session_room = r1.session_room
+                            AND participant_id = NEW.eid;
+    DELETE FROM sessions WHERE session_date = r1.session_date AND session_time = r1.session_time
+                            AND session_floor = r1.session_floor AND session_room = r1.session_room
+                            AND booker_id = NEW.eid;
+    END IF;
+    END LOOP;
+    CLOSE curs;
+END IF;
+RETURN NEW;
+END;
+$$ LANGUAGE PLPGSQL;
+
+CREATE TRIGGER remove_resigned_employee AFTER
+    INSERT OR UPDATE ON Employees
+    FOR EACH ROW EXECUTE FUNCTION remove_from_future_meeting();
+
+
 -- 2 of the core functions
 CREATE OR REPLACE PROCEDURE book_room(IN floor_no INTEGER , IN room_no INTEGER , IN my_date DATE, IN start_hour INTEGER ,
 IN end_hour INTEGER , IN employee_id INTEGER )
@@ -163,10 +203,9 @@ AS $$
 DECLARE
 isSick BOOL;
 session_count INTEGER := 0;
-insertion_count INTEGER := 0;
 total_session INTEGER := end_hour - start_hour;
 isAvailable BOOL := True;
-meeting_date DATE := my_date;
+leaving_date DATE ;
 booker_did INTEGER ;
 room_did INTEGER ;
 BEGIN
@@ -174,10 +213,18 @@ BEGIN
 SELECT (end_hour - start_hour) INTO total_session;
 SELECT did INTO booker_did FROM Employees WHERE eid = employee_id;
 SELECT did INTO room_did FROM MeetingRooms WHERE floors = floor_no AND room = room_no;
+SELECT resignedDate INTO leaving_date FROM Employees WHERE eid = employee_id;
+
+IF NOT (leaving_date IS NULL) AND leaving_date <= CURRENT_DATE
+THEN
+RAISE EXCEPTION 'You have left, cannot book meeting';
+END IF;
+
 IF (total_session <= 0)
 THEN
-RAISE EXCEPTION 'Invalid duration';
+RAISE EXCEPTION 'Invalid duration, please check';
 END IF;
+
 -- if department of booker and room does not match, not allowed
 IF NOT booker_did = room_did
 THEN
@@ -185,12 +232,12 @@ RAISE EXCEPTION 'You can only book meeting rooms in your department';
 END IF;
 -- if the booker is not manager or senior, not allowed
 IF NOT EXISTS (
-    SELECT 1 FROM Senior WHERE eid = employee_id
+    SELECT * FROM Senior WHERE eid = employee_id
     UNION
-    SELECT 1 FROM Manager WHERE eid = employee_id
+    SELECT * FROM Manager WHERE eid = employee_id
 )
 THEN
-RAISE EXCEPTION 'You are not allowed to book';
+RAISE EXCEPTION 'You are not allowed to book, please ask a senior or manager';
 END IF;
 -- if the booker has not declared health, not allowed
 SELECT fever INTO isSick FROM HealthDeclaration WHERE eid = employee_id AND declareDate = CURRENT_DATE ;
@@ -204,10 +251,9 @@ THEN
 RAISE EXCEPTION 'You must seek medical attention immediately';
 END IF;
 -- if the session at the time is already booked, not allowed
-LOOP
-EXIT WHEN session_count = total_session;
+WHILE (session_count < total_session) LOOP
 IF EXISTS (
-    SELECT 1 FROM sessions WHERE session_date = my_date AND session_time = (start_hour + (session_count))
+    SELECT * FROM sessions WHERE session_date = my_date AND session_time = (start_hour + (session_count))
                                  AND session_floor = floor_no AND session_room = room_no
 )
 THEN
@@ -218,11 +264,11 @@ END LOOP;
 
 IF NOT (isAvailable IS TRUE )
 THEN
-RAISE EXCEPTION 'Session unavailable';
+RAISE EXCEPTION 'Some session(s) unavailable';
 END IF;
 -- insert all sessions into sessions table
-LOOP
-EXIT WHEN insertion_count = total_session;
+session_count := 0;
+WHILE (session_count < total_session) LOOP
 INSERT INTO Sessions(
     session_date,
     session_time,
@@ -230,18 +276,20 @@ INSERT INTO Sessions(
     session_room,
     participant_id,
     booker_id,
+    is_approved,
     approver_id
 
 ) VALUES(
     my_date,
-    start_hour + insertion_count,
+    start_hour + session_count,
     floor_no,
     room_no,
     employee_id,
     employee_id,
+    NULL,
     NULL
         );
-insertion_count := insertion_count + 1;
+session_count := session_count + 1;
 END LOOP;
 
 END;
@@ -253,30 +301,18 @@ AS $$
 DECLARE
 all_exist BOOL := TRUE;
 session_count INTEGER := 0;
-deletion_count INTEGER := 0;
 total_session INTEGER := end_hour - start_hour;
 BEGIN
 
 IF (total_session <= 0)
 THEN
-RAISE EXCEPTION 'Invalid duration';
-END IF;
-
-IF employee_id NOT IN (SELECT booker_id FROM Sessions WHERE session_date = my_date
-                                                        AND session_time = start_hour
-                                                        AND session_floor = floor_no
-                                                        AND session_room = room_no
-                                                        AND participant_id = employee_id
-)
-THEN
-RAISE EXCEPTION 'Only booker may unbook';
+RAISE EXCEPTION 'Invalid duration, please check';
 END IF;
 
 -- checks if the stated sessions exist
-LOOP
-EXIT WHEN session_count = total_session;
+WHILE (session_count < total_session) LOOP
 IF NOT EXISTS (
-    SELECT 1 FROM sessions WHERE session_date = my_date
+    SELECT * FROM sessions WHERE session_date = my_date
                              AND session_time = (start_hour + session_count)
                              AND session_floor = floor_no
                              AND session_room = room_no
@@ -293,13 +329,23 @@ THEN
 RAISE EXCEPTION 'Some session(s) do(es) not exist, please correct';
 END IF;
 
-LOOP
-EXIT WHEN deletion_count = total_session;
+IF employee_id NOT IN (SELECT booker_id FROM Sessions WHERE session_date = my_date
+                                                        AND session_time = start_hour
+                                                        AND session_floor = floor_no
+                                                        AND session_room = room_no
+                                                        AND participant_id = employee_id
+)
+THEN
+RAISE EXCEPTION 'Only booker may unbook';
+END IF;
+
+session_count := 0;
+WHILE (session_count < total_session) LOOP
 DELETE FROM Sessions WHERE session_date = my_date
-                             AND session_time = (start_hour + deletion_count)
+                             AND session_time = (start_hour + session_count)
                              AND session_floor = floor_no
                              AND session_room = room_no;
-deletion_count := deletion_count + 1;
+session_count := session_count + 1;
 END LOOP;
 
 END;
