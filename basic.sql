@@ -70,6 +70,16 @@ THEN
 RAISE EXCEPTION 'Only managers can update capacity';
 END IF;
 
+IF (new_capacity <= 0)
+THEN
+RAISE EXCEPTION 'Invalid new capacity';
+END IF;
+
+IF NOT EXISTS (SELECT * FROM MeetingRooms WHERE floors = floor_no AND room = room_no)
+THEN
+RAISE EXCEPTION 'Invalid meeting room, please correct';
+END IF;
+
 INSERT INTO updates (
     dates,
     new_cap,
@@ -229,18 +239,26 @@ IN end_hour INTEGER , IN employee_id INTEGER )
 AS $$
 DECLARE
 isSick BOOL;
-session_count INTEGER := 0;
-total_session INTEGER := end_hour - start_hour;
-isAvailable BOOL := True;
+session_count INTEGER ;
+total_session INTEGER ;
+isAvailable BOOL ;
 leaving_date DATE ;
 booker_did INTEGER ;
 room_did INTEGER ;
 BEGIN
 -- if the start time is greater than or equal to end time, not allowed
+total_session := end_hour - start_hour;
+session_count := 0;
+isAvailable := TRUE;
 SELECT (end_hour - start_hour) INTO total_session;
 SELECT did INTO booker_did FROM Employees WHERE eid = employee_id;
 SELECT did INTO room_did FROM MeetingRooms WHERE floors = floor_no AND room = room_no;
 SELECT resignedDate INTO leaving_date FROM Employees WHERE eid = employee_id;
+
+IF (my_date < CURRENT_DATE )
+THEN
+RAISE EXCEPTION 'Date has passed, cannot book';
+END IF;
 
 IF NOT EXISTS (SELECT * FROM MeetingRooms WHERE floors = floor_no AND room = room_no)
 THEN
@@ -331,10 +349,13 @@ CREATE OR REPLACE PROCEDURE unbook_room(IN floor_no INTEGER, IN room_no INTEGER,
 IN end_hour INTEGER, IN employee_id INTEGER)
 AS $$
 DECLARE
-all_exist BOOL := TRUE;
-session_count INTEGER := 0;
-total_session INTEGER := end_hour - start_hour;
+all_exist BOOL ;
+session_count INTEGER ;
+total_session INTEGER ;
 BEGIN
+all_exist := TRUE;
+session_count := 0;
+total_session := end_hour - start_hour;
 
 IF (total_session <= 0)
 THEN
