@@ -157,7 +157,8 @@ CREATE TRIGGER remove_large_meeting AFTER
     INSERT OR UPDATE ON MeetingRooms
     FOR EACH ROW EXECUTE FUNCTION remove_meeting();
 
-DROP TRIGGER IF EXISTS remove_resigned_employee ON Sessions;
+-- Trigger responsible for removing resigned employees from future meetings
+DROP TRIGGER IF EXISTS remove_resigned_employee ON Employees;
 
 CREATE OR REPLACE FUNCTION remove_from_future_meeting()
   RETURNS TRIGGER
@@ -195,6 +196,32 @@ CREATE TRIGGER remove_resigned_employee AFTER
     INSERT OR UPDATE ON Employees
     FOR EACH ROW EXECUTE FUNCTION remove_from_future_meeting();
 
+-- Trigger responsible for preventing resigned employee from declare health
+DROP TRIGGER IF EXISTS no_declare_health ON healthDeclaration;
+
+CREATE OR REPLACE FUNCTION prevent_declaration()
+  RETURNS TRIGGER
+AS $$
+DECLARE
+leaving_date DATE;
+BEGIN
+SELECT resignedDate INTO leaving_date FROM Employees WHERE eid = NEW.eid;
+IF NOT (leaving_date IS NULL)
+THEN
+    IF NEW.declareDate >= leaving_date
+    THEN
+    RAISE EXCEPTION 'The employee have left, cannot declare health';
+    END IF;
+    RETURN NEW;
+END IF;
+RETURN NEW;
+END;
+$$ LANGUAGE PLPGSQL;
+
+
+CREATE TRIGGER no_declare_health BEFORE
+    INSERT OR UPDATE ON healthDeclaration
+    FOR EACH ROW EXECUTE FUNCTION prevent_declaration();
 
 -- 2 of the core functions
 CREATE OR REPLACE PROCEDURE book_room(IN floor_no INTEGER , IN room_no INTEGER , IN my_date DATE, IN start_hour INTEGER ,
