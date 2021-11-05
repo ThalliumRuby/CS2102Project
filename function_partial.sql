@@ -76,6 +76,7 @@ BEGIN
 		RETURN NULL;
 	END IF;
 
+
 	IF NEW.is_approved = FALSE THEN
 		RAISE NOTICE 'This session has been removed, so you are not allowed to joing the meeting.';
 		RETURN NULL;
@@ -128,6 +129,11 @@ BEGIN
 	IF m_date < CURRENT_DATE THEN
 	RAISE NOTICE 'You cannot join a meeting in the past.';
 	END IF;
+	
+	IF s_time <= e_time THEN 
+	RAISE NOTICE 'Invalid duration!';
+	END IF;
+
 
 	IF NOT EXISTS(SELECT * FROM healthDeclaration WHERE eid = e_id AND declareDate = CURRENT_DATE) THEN
 	RAISE NOTICE 'You haven not declare youe temperature for today.';
@@ -187,6 +193,10 @@ DECLARE
 temp_e INT := e_time - 1;
 old_session Sessions%ROWTYPE;
 BEGIN
+	IF s_time <= e_time THEN 
+	RAISE NOTICE 'Invalid duration!';
+	END IF;
+
 	FOR hour IN s_time..temp_e LOOP
 		SELECT * INTO old_session
 			FROM Sessions
