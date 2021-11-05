@@ -5541,7 +5541,7 @@ insert into Sessions (session_date, session_time, session_floor, session_room, p
 insert into Updates (floors, room,  new_cap, dates, eid) values (2, 1, 70, '5/29/2020', 46);
 insert into Updates (floors, room,  new_cap, dates, eid) values (2, 2, 110, '8/2/2021', 148);
 insert into Updates (floors, room,  new_cap, dates, eid) values (2, 3, 230, '5/23/2020', 148);
-insert into Updates (floors, room,  new_cap, dates, eid) values (2, 4, , '8/1/2021', 101);
+insert into Updates (floors, room,  new_cap, dates, eid) values (2, 4, 200, '8/1/2021', 101);
 insert into Updates (floors, room,  new_cap, dates, eid) values (2, 5, 100, '4/7/2020', 9);
 insert into Updates (floors, room,  new_cap, dates, eid) values (2, 6, 45, '10/3/2021', 22);
 insert into Updates (floors, room,  new_cap, dates, eid) values (2, 7, 80, '11/18/2019', 4);
@@ -5569,7 +5569,7 @@ insert into Updates (floors, room,  new_cap, dates, eid) values (4, 8, 50, '5/10
 insert into Updates (floors, room,  new_cap, dates, eid) values (4, 9, 50, '1/14/2020', 14);
 insert into Updates (floors, room,  new_cap, dates, eid) values (4, 10, 45, '10/24/2021', 4);
 insert into Updates (floors, room,  new_cap, dates, eid) values (3, 1, 460, '8/26/2019', 3);
-insert into Updates (floors, room,  new_cap, dates, eid) values (3, 2, '12/18/2020', 14);
+insert into Updates (floors, room,  new_cap, dates, eid) values (3, 2, 100, '12/18/2020', 14);
 insert into Updates (floors, room,  new_cap, dates, eid) values (3, 3, 80, '8/9/2020', 8);
 insert into Updates (floors, room,  new_cap, dates, eid) values (3, 4, 420, '10/13/2020', 34);
 insert into Updates (floors, room,  new_cap, dates, eid) values (3, 5, 330, '2/26/2020', 34);
@@ -5583,7 +5583,7 @@ insert into Updates (floors, room,  new_cap, dates, eid) values (5, 2, 150, '10/
 insert into Updates (floors, room,  new_cap, dates, eid) values (5, 3, 30, '7/14/2021', 3);
 insert into Updates (floors, room,  new_cap, dates, eid) values (5, 4, 130, '10/13/2021', 4);
 insert into Updates (floors, room,  new_cap, dates, eid) values (5, 5, 40, '12/23/2020', 73);
-insert into Updates (floors, room,  new_cap, dates, eid) values (5, 6, , '3/4/2021', 54);
+insert into Updates (floors, room,  new_cap, dates, eid) values (5, 6, 290, '3/4/2021', 54);
 insert into Updates (floors, room,  new_cap, dates, eid) values (5, 7, 260, '5/19/2021', 4);
 insert into Updates (floors, room,  new_cap, dates, eid) values (5, 8, 50, '10/21/2021', 37);
 insert into Updates (floors, room,  new_cap, dates, eid) values (5, 9, 100, '8/7/2019', 34);
