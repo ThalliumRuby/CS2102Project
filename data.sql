@@ -5465,7 +5465,7 @@ insert into Sessions (session_date, session_time, session_floor, session_room, p
 insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/2/2021', 16, 5, 4, 76, 15, null, null);
 insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/2/2021', 16, 5, 4, 75, 15, null, null);
 insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/2/2021', 16, 5, 4, 95, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/2/2021', 16, 5, 4, 17, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/2/2021', 16, 5, 4, 15, 15, null, null);
 insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/2/2021', 16, 5, 4, 6, 15, null, null);
 insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/2/2021', 16, 5, 4, 105, 15, null, null);
 insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/2/2021', 16, 5, 4, 127, 15, null, null);
