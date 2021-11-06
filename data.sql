@@ -5138,6 +5138,152 @@ insert into healthDeclaration (declareDate, temp, eid) values ('11/5/2021', 37.2
 insert into healthDeclaration (declareDate, temp, eid) values ('11/5/2021', 36.0, 150);
 
 
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/3/2021', 10, 3, 8, 120, 120, TRUE, 50);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/3/2021', 10, 3, 8, 42, 120, TRUE, 50);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/3/2021', 10, 3, 8, 50, 120, TRUE, 50);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/3/2021', 10, 3, 8, 51, 120, TRUE, 50);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/3/2021', 10, 3, 8, 67, 120, TRUE, 50);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/3/2021', 10, 3, 8, 89, 120, TRUE, 50);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/3/2021', 10, 3, 8, 128, 120, TRUE, 50);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/3/2021', 10, 3, 8, 133, 120, TRUE, 50);
+
+
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/3/2021', 11, 3, 8, 120, 120, TRUE, 50);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/3/2021', 11, 3, 8, 42, 120, TRUE, 50);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/3/2021', 11, 3, 8, 50, 120, TRUE, 50);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/3/2021', 11, 3, 8, 51, 120, TRUE, 50);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/3/2021', 11, 3, 8, 67, 120, TRUE, 50);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/3/2021', 11, 3, 8, 89, 120, TRUE, 50);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/3/2021', 11, 3, 8, 128, 120, TRUE, 50);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/3/2021', 11, 3, 8, 133, 120, TRUE, 50);
+
+
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 15, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 47, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 103, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 30, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 136, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 134, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 25, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 139, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 8, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 120, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 128, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 137, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 32, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 18, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 79, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 124, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 135, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 21, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 3, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 71, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 107, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 100, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 7, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 87, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 36, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 76, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 75, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 95, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 105, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 127, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 64, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 16, 2, 7, 145, 15, TRUE, 4);
+
+
+
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 11, 3, 2, 15, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 11, 3, 2, 11, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 11, 3, 2, 19, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 11, 3, 2, 3, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 11, 3, 2, 36, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 11, 3, 2, 40, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 11, 3, 2, 50, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 11, 3, 2, 70, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 11, 3, 2, 80, 15, TRUE, 4);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/4/2021', 11, 3, 2, 91, 15, TRUE, 4);
+
+
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 16, 2, 2, 121, 121, TRUE, 69);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 16, 2, 2, 1, 121, TRUE, 69);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 16, 2, 2, 43, 121, TRUE, 69);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 16, 2, 2, 69, 121, TRUE, 69);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 16, 2, 2, 71, 121, TRUE, 69);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 16, 2, 2, 102, 121, TRUE, 69);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 16, 2, 2, 127, 121, TRUE, 69);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 16, 2, 2, 36, 121, TRUE, 69);
+
+
+
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 16, 3, 4, 13, 13, TRUE, 56);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 16, 3, 4, 149, 13, TRUE, 56);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 16, 3, 4, 146, 13, TRUE, 56);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 16, 3, 4, 139, 13, TRUE, 56);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 16, 3, 4, 135, 13, TRUE, 56);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 16, 3, 4, 120, 13, TRUE, 56);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 16, 3, 4, 119, 13, TRUE, 56);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 16, 3, 4, 99, 13, TRUE, 56);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 16, 3, 4, 89, 13, TRUE, 56);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 16, 3, 4, 85, 13, TRUE, 56);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 16, 3, 4, 83, 13, TRUE, 56);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 16, 3, 4, 79, 13, TRUE, 56);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 16, 3, 4, 72, 13, TRUE, 56);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 16, 3, 4, 60, 13, TRUE, 56);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 16, 3, 4, 65, 13, TRUE, 56);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 16, 3, 4, 50, 13, TRUE, 56);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 16, 3, 4, 49, 13, TRUE, 56);
+
+
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 18, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 116, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 68, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 146, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 52, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 132, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 92, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 101, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 114, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 97, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 112, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 108, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 22, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 59, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 98, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 73, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 44, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 117, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 88, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 125, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 48, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 26, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 57, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 81, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 61, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 77, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 131, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 17, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 37, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 28, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 104, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 56, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 91, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 54, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 29, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 4, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 96, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 10, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 35, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 45, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 86, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 144, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 39, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 93, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 31, 18, TRUE, 148);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/5/2021', 13, 1, 6, 14, 18, TRUE, 148);
+
+
+
 insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/6/2021', 10, 3, 8, 120, 120, TRUE, 50);
 insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/6/2021', 10, 3, 8, 42, 120, TRUE, 50);
 insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/6/2021', 10, 3, 8, 50, 120, TRUE, 50);
