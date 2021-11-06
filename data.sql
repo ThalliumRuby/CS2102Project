@@ -5087,37 +5087,36 @@ insert into healthDeclaration (declareDate, temp, eid) values ('11/5/2021', 36.0
 
 
 /*session1*/
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 62, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 15, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 136, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 149, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 128, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 124, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 150, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 39, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 126, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 129, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 146, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 14, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 91, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 43, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 133, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 90, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 71, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 98, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 101, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 143, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 72, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 78, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 134, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 134, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 40, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 123, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 111, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 60, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 58, 15, null, null);
-insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 4, 9, 58, 15, null, null);
-
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 62, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 15, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 136, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 149, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 128, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 124, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 150, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 39, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 126, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 129, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 146, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 14, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 91, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 43, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 133, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 90, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 71, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 98, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 101, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 143, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 72, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 78, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 134, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 134, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 40, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 123, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 111, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 60, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 58, 15, null, null);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/13/2021', 10, 3, 9, 58, 15, null, null);
 /*session2*/
 insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/22/2021', 16, 2, 9, 67, 13, 'true', 56);
 insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/22/2021', 16, 2, 9, 93, 13, 'true', 56);
