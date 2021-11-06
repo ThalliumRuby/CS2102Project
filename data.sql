@@ -165,7 +165,7 @@ insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) val
 insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (143, 9, 'Meredithe', 'e0143@mycompany.com', '440-337-1334', null, 'Manager');
 insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (144, 8, 'Brinn', 'e0144@mycompany.com', '509-227-8082', null, 'Junior');
 insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (145, 14, 'Patrizius', 'e0145@mycompany.com', '685-344-5047', null, 'Manager');
-insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (146, 10, 'Millisent', 'e0146@mycompany.com', '555-608-9667', null, 'Senior');
+insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (146, 10, 'Millisent', 'e0146@mycompany.com', '555-608-9667', null, '');
 insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (147, 11, 'Kerby', 'e0147@mycompany.com', '484-661-6163', '09/30/2021', 'Junior');
 insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (148, 3, 'Wright', 'e0148@mycompany.com', '512-768-9512', null, 'Manager');
 insert into Employees (eid, did, ename, email, contact, resignedDate, ekind) values (149, 15, 'Nicolette', 'e0149@mycompany.com', '400-347-0249', null, 'Senior');
@@ -5209,6 +5209,27 @@ insert into Sessions (session_date, session_time, session_floor, session_room, p
 insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('3/26/2021', 11, 2, 10, 6, 92, 'true', 83);
 insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('1/27/2021', 11, 2, 10, 26, 92, 'true', 83);
 insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('1/25/2021', 11, 2, 10, 63, 92, 'true', 83);
+
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('9/2/2021', 12, 1, 1, 50, 16, 'true', 146);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('9/16/2021', 12, 1, 1, 138, 16, 'true', 146);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('9/23/2021', 12, 1, 1, 2, 16, 'true', 146);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('6/2/2021', 12, 1, 1, 93, 16, 'true', 146);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('12/10/2020', 12, 1, 1, 6, 16, 'true', 146);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('8/27/2021', 12, 1, 1, 26, 16, 'true', 146);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('11/19/2020', 12, 1, 1, 61, 16, 'true', 146);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('10/21/2021', 12, 1, 1, 75, 16, 'true', 146);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('2/4/2021', 12, 1, 1, 32, 16, 'true', 146);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('2/12/2021', 12, 1, 1, 87, 16, 'true', 146);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('3/9/2021', 12, 1, 1, 139, 16, 'true', 146);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('5/24/2021', 12, 1, 1, 29, 16, 'true', 146);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('12/2/2020', 12, 1, 1, 116, 16, 'true', 146);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('3/16/2021', 12, 1, 1, 68, 16, 'true', 146);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('4/8/2021', 12, 1, 1, 21, 16, 'true', 146);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('7/21/2021', 12, 1, 1, 2, 16, 'true', 146);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('4/7/2021', 12, 1, 1, 16, 16, 'true', 146);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('8/13/2021', 12, 1, 1, 60, 16, 'true', 146);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('4/7/2021', 12, 1, 1, 105, 16, 'true', 146);
+insert into Sessions (session_date, session_time, session_floor, session_room, participant_id, booker_id, is_approved, approver_id) values ('8/11/2021', 12, 1, 1, 62, 16, 'true', 146);
 
 
 UPDATE healthDeclaration SET fever = TRUE WHERE temp > 37.5;
