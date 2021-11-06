@@ -4,6 +4,11 @@ RETURNS VOID AS $$
 DECLARE
 fever_statue BOOLEAN := FALSE;
 BEGIN
+	IF de_date <> CURRENT_DATE THEN
+	RAISE NOTICE 'You only can declare temperature for today.';
+	RETURN;
+	END IF;
+
 	IF EXISTS (SELECT * FROM healthDeclaration WHERE eid = e_id AND declaredate = de_date) THEN
 	DELETE
 	FROM healthDeclaration
@@ -36,11 +41,17 @@ FOR EACH ROW EXECUTE FUNCTION check_fever();
 
 
 CREATE OR REPLACE FUNCTION contact_tracing
+(e_id INT, fever_date DATE)
+RETURNS TABLE(close_contact_id INT) AS $$
 DECLARE
 past_day DATE := fever_date - 3;
 d DATE;
 BEGIN
 	FOR d IN 0..7 LOOP
+		DELETE 
+		FROM Sessions
+		WHERE booker_id = e_id AND session_date = fever_date + d;
+
 		DELETE
 		FROM Sessions
 		WHERE participant_id = e_id AND session_date = fever_date + d;
@@ -76,19 +87,23 @@ BEGIN
 		RETURN NULL;
 	END IF;
 
-
 	IF NEW.is_approved = FALSE THEN
 		RAISE NOTICE 'This session has been removed, so you are not allowed to joing the meeting.';
 		RETURN NULL;
 	END IF;
 
-	SELECT new_cap INTO max_cap
-	FROM Updates U
-	WHERE dates <= NEW.session_date 
-	AND U.floors = NEW.session_floor 
-	AND U.room = NEW.session_room
-	ORDER BY dates DESC
-	LIMIT 1;
+	-- SELECT new_cap INTO max_cap
+	-- FROM Updates U
+	-- WHERE dates <= NEW.session_date 
+	-- AND U.floors = NEW.session_floor 
+	-- AND U.room = NEW.session_room
+	-- ORDER BY dates DESC
+	-- LIMIT 1;
+
+	SELECT capacity INTO max_cap
+	FROM MeetingRooms
+	WHERE floors = NEW.session_floor
+	AND room = NEW.session_room;
 
 
 	SELECT COUNT(s.participant_id) INTO count
@@ -125,12 +140,18 @@ e_hour INT := e_time - 1;
 e_fever BOOLEAN := FALSE;
 exist_session Sessions%ROWTYPE;
 BEGIN
+	IF e_id IN (SELECT eid
+				FROM Employees
+				WHERE resignedDate IS NOT NULL) THEN
+	RAISE NOTICE 'Send your resume to our HR first.';
+	RETURN;
+	END IF;
 
 	IF m_date < CURRENT_DATE THEN
 	RAISE NOTICE 'You cannot join a meeting in the past.';
 	END IF;
-	
-	IF s_time <= e_time THEN 
+
+	IF s_time >= e_time THEN 
 	RAISE NOTICE 'Invalid duration!';
 	END IF;
 
@@ -154,6 +175,10 @@ BEGIN
 	
 	IF e_fever = FALSE THEN
 		FOR hour IN s_time..e_hour LOOP
+			IF EXISTS (SELECT * FROM Sessions WHERE participant_id = e_id AND session_date = m_date AND session_time = hour) THEN
+			RAISE NOTICE 'You have joined another meeting at %:00 on %',hour, m_date;
+			CONTINUE;
+			END IF;
 
 			IF NOT EXISTS(SELECT * 
 							FROM Sessions
@@ -164,6 +189,8 @@ BEGIN
 			RAISE NOTICE 'The meeting on %:00 does not exist', hour;
 			CONTINUE;
 			END IF;
+
+
 
 			SELECT * INTO exist_session
 			FROM Sessions
@@ -193,10 +220,6 @@ DECLARE
 temp_e INT := e_time - 1;
 old_session Sessions%ROWTYPE;
 BEGIN
-	IF s_time <= e_time THEN 
-	RAISE NOTICE 'Invalid duration!';
-	END IF;
-
 	FOR hour IN s_time..temp_e LOOP
 		SELECT * INTO old_session
 			FROM Sessions
