@@ -1,3 +1,4 @@
+--admin
 --f1
 CREATE OR REPLACE FUNCTION non_compliance
   (start_date DATE, end_date DATE)
@@ -64,6 +65,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+--core
 --f1
 CREATE OR REPLACE FUNCTION search_room
   (mincapacity INT, rdate Date, start_hour INT, end_hour INT)
