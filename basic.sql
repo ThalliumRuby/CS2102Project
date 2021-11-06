@@ -102,10 +102,13 @@ CREATE OR REPLACE PROCEDURE add_employee(IN employee_name VARCHAR(50), IN contac
 AS $$
 DECLARE
 my_eid INT;
+my_email VARCHAR (50);
 BEGIN
     SELECT MAX(eid) INTO my_eid FROM Employees;
-	INSERT INTO Employees (eid, did, ename, contact, ekind)
-		VALUES(my_eid +1, department_id, employee_name, contact_num, kind);
+    my_eid := my_eid + 1;
+    my_email := 'e'|| my_eid::varchar(50) || '%%@mycompany.com';
+	INSERT INTO Employees (eid, did, ename, email, contact, ekind)
+		VALUES(my_eid, department_id, employee_name, my_email, contact_num, kind);
 END;
 $$ LANGUAGE PLPGSQL;
 
@@ -233,6 +236,7 @@ CREATE TRIGGER no_declare_health BEFORE
     INSERT OR UPDATE ON healthDeclaration
     FOR EACH ROW EXECUTE FUNCTION prevent_declaration();
 
+
 -- 2 of the core functions
 CREATE OR REPLACE PROCEDURE book_room(IN floor_no INTEGER , IN room_no INTEGER , IN my_date DATE, IN start_hour INTEGER ,
 IN end_hour INTEGER , IN employee_id INTEGER )
@@ -273,6 +277,11 @@ END IF;
 IF (total_session <= 0)
 THEN
 RAISE EXCEPTION 'Invalid duration, please check';
+END IF;
+
+IF (start_hour > 23 OR end_hour > 24)
+THEN
+RAISE EXCEPTION 'Invalid timing, please correct';
 END IF;
 
 -- if department of booker and room does not match, not allowed
@@ -357,6 +366,11 @@ all_exist := TRUE;
 session_count := 0;
 total_session := end_hour - start_hour;
 
+IF (start_hour > 23 OR end_hour > 24)
+THEN
+RAISE EXCEPTION 'Invalid timing, please correct';
+END IF;
+
 IF (total_session <= 0)
 THEN
 RAISE EXCEPTION 'Invalid duration, please check';
@@ -389,7 +403,7 @@ END LOOP;
 
 IF NOT (all_exist IS TRUE)
 THEN
-RAISE EXCEPTION 'Some session(s) do(es) not exist, please correct';
+RAISE EXCEPTION 'Some session(s) do(es) not exist or you are not the booker, please correct';
 END IF;
 
 IF employee_id NOT IN (SELECT booker_id FROM Sessions WHERE session_date = my_date
