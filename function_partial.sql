@@ -140,12 +140,12 @@ e_hour INT := e_time - 1;
 e_fever BOOLEAN := FALSE;
 exist_session Sessions%ROWTYPE;
 BEGIN
-	IF e_id IN (SELECT eid
-				FROM Employees
-				WHERE resignedDate IS NOT NULL) THEN
-	RAISE NOTICE 'Send your resume to our HR first.';
-	RETURN;
-	END IF;
+	-- IF e_id IN (SELECT eid
+	-- 			FROM Employees
+	-- 			WHERE resignedDate IS NOT NULL) THEN
+	-- RAISE NOTICE 'Send your resume to our HR first.';
+	-- RETURN;
+	-- END IF;
 
 	IF m_date < CURRENT_DATE THEN
 	RAISE NOTICE 'You cannot join a meeting in the past.';
